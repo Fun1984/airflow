@@ -4,7 +4,7 @@ from airflow.sdk import DAG
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    dag_id="example_bash_operator", #Airflow 웹 내 dag이름 #파이썬 파일 명이랑은 상관없다(하지만 일치시키는 게 좋다)
+    dag_id="dags_bash_operator", #Airflow 웹 내 dag이름 #파이썬 파일 명이랑은 상관없다(하지만 일치시키는 게 좋다)
     schedule="0 0 * * *",
     start_date=pendulum.datetime(2021, 1, 1, tz="Asia/Seoul"),
     catchup=False, #False - start_date와 현시간 간 누락 기간까지 돌리지 않는다 | True - (한꺼번에) 돌린다 <가급적 False로 두는 게 좋다>  
