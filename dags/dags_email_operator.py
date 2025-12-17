@@ -11,7 +11,7 @@ with DAG(
 ) as dag:
     send_email_task = EmailOperator(
         task_id='send_email_task',
-        conn_id='conn_smtp_gamil', #airflow 3.0 이후 추가 필요
+        conn_id='my-email-conn', #airflow 3.0 이후 추가 필요
         to='sorkejso@naver.com',
         subject='Airflow 성공메일',
         html_content='Airflow 작업이 완료되었습니다'
