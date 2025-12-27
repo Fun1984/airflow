@@ -24,7 +24,7 @@ with DAG(
 
     @task(task_id='python_xcom_pull_task')
     def xcom_pull(**kwargs):
-        ti = kwargs['t1']
+        ti = kwargs['ti']
         value1 = ti.xcom_pull(key='result1', task_ids='python_xcom_push_task1') #버그로 task_id 직접 안넣으면 에러가 터지는 버그가 있음
         value2 = ti.xcom_pull(key='result2', task_ids='python_xcom_push_task2')
         print(value1)
