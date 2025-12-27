@@ -18,7 +18,7 @@ with DAG(
                         "echo COMPLETE"
     )
 
-    bash_pull = BashOpertor(
+    bash_pull = BashOperator(
         task_id = 'bash_pull',
         env={'PUSHED_VALUE':"{{ti.xcom_pull(task_ids='bash_push', key='bash_pushed')}}",
              'RETURN_VALUE':"{{ti.xcom_pull(task_ids='bash_push')}}"},
