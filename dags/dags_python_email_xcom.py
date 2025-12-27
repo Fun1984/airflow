@@ -2,7 +2,7 @@ from airflow import DAG
 import pendulum
 import datetime
 from airflow.decorators import task
-from airflow.operators import EmailOperator
+from airflow.operators.email import EmailOperator
 
 with DAG(
     dag_id="dags_python_email_xcom",
