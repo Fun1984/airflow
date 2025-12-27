@@ -1,4 +1,4 @@
-from airflow.timedelta.trigger import CronTriggerTimetable
+from airflow.timetables.trigger import CronTriggerTimetable
 from airflow.sdk import DAG, task
 from datetime import timedelta
 from pprint import pprint
