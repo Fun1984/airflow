@@ -4,7 +4,7 @@ import datetime
 from airflow.decorators import task
 
 with DAG(
-    dag_id="dags_puthon_with_xcom_eg2",
+    dag_id="dags_python_with_xcom_eg2",
     schedule="30 6 * * *",
     start_date=pendulum.datetime(2025,12,27,tz="Asia/Seoul"),
     catchup=False
@@ -26,4 +26,4 @@ with DAG(
 
     python_xcom_push_by_return = xcom_push_result() 
     xcom_pull_2(python_xcom_push_by_return)
-    python_xcom_push_by_return >> xcom_pull_2
+    python_xcom_push_by_return >> xcom_pull_1
