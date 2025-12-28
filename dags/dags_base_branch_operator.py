@@ -2,7 +2,7 @@ from airflow import DAG
 import pendulum
 import datetime
 from airflow.operators.python import PythonOperator
-from airflow.operators.branch import BaseBranchOperator
+from airflow.operators.branch import BaseBranchOperator ##일단 된다.(Document에선 최신 버전에서 다른 부분을 가리킴)
 
 with DAG(
     dag_id='dags_base_branch_operator',
