@@ -5,7 +5,7 @@ from airflow.decorators import task
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.operators.branch import BaseBranchOperator ##일단 된다.(Document에선 최신 버전에서 다른 부분을 가리킴)
-from airflow.exceiptions import AirflowException
+from airflow.exceptions import AirflowException
 
 with DAG(
     dag_id='dags_python_with_trigger_rule_eg1',
