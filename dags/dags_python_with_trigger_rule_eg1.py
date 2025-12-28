@@ -21,7 +21,7 @@ with DAG(
     @task(task_id='python_upstream_1')
     def python_upstream_1():
         import random
-        if random.choise([0,1]) == 0 :
+        if random.choice([0,1]) == 0 :
             raise AirflowException('downstream_1 Exception!')
         else : 
             print('정상 처리')
