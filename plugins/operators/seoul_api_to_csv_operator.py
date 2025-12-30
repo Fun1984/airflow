@@ -32,8 +32,10 @@ class SeoulApiToCsvOperator(BaseOperator):
             else :
                 start_row = end_row + 1
                 end_row += 1000
-        
+
+        print("SSSSSSSSSSSSSSSSSSSSS ", os.path.exists(self.path))
         if not os.path.exists(self.path):
+            print(self.path)
             os.system(f'mkdir -p {self.path}')
         total_row_df.to_csv(self.path + '/' + self.file_name, encoding='utf-8', index=False)
 
@@ -55,5 +57,5 @@ class SeoulApiToCsvOperator(BaseOperator):
         row_data = contents.get(key_nm).get('row')
         row_df = pd.DataFrame(row_data)
         print(row_df)
-        
+
         return row_df
