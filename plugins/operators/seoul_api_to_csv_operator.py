@@ -38,8 +38,8 @@ class SeoulApiToCsvOperator(BaseOperator):
             print("selfpath :::::: ", self.path)
             os.system(f'mkdir -p {self.path}')
         total_row_df.to_csv(self.path + '/' + self.file_name, encoding='utf-8', index=False)
-        print(pd.read_csv(total_row_df))
-        
+        print(pd.read_csv(self.path + '/' + self.file_name))
+
     def _call_api(self, base_url, start_row, end_row):
         import requests
         import json
