@@ -19,7 +19,8 @@ with DAG(
         task_id='trigger_dag_task',
         trigger_dag_id='dags_python_operator',
         trigger_run_id=None,
-        execution_date='{{data_interval_end}}',
+        # execution_date='{{data_interval_start}}', ##3.0에서는 삭제됨. 이상한 거 넣으면 에러 터짐. 
+        # 강제로라도 하고 싶다면, conf={ "logical_date":"{{data_interval_end}}"} 로 쓰길 추천
         reset_dag_run=True,
         wait_for_completion=False,
         poke_interval=60,
