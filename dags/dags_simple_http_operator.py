@@ -10,7 +10,7 @@ with DAG(
     schedule=None,
     catchup=False
 ) as dag:
-    tb_cycle_station_info = SimpleHttpOperator(
+    tb_cycle_station_info = HttpOperator(
         task_id='tb_cycle_station_info',
         http_conn_id='openapi.seoul.go.kr',
         endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/CardSubwayTime/1/5/202511', #보안리스크로 apikey를 넣는 것은 비추천함. airflow에 variables를 때리는 게 좋다. #{{var.value.apikey_openapi_seoul_go_kr}} 
