@@ -18,8 +18,8 @@ with DAG(
         # 그 후, (연결설정이 된)airflow 폴더에서 files를 mkdir 해준다. 
         task_id='tb_subway_status',
         dataset_nm = 'CardSubwayTime', #이건 API 확인해서 넣어 줘야함.
-        path='/opt/airflow/files/TbSubwayStatus', #이 부분은 wsl이 아니라, 실행되는 워커컨테이너 내부임.
-        file_name='{{data_interval_start.in_timezone("Asia/Seoul") | ds_nodash }}.csv'
+        path='/opt/airflow/files/TbSubwayStatus/{{data_interval_start.in_timezone("Asia/Seoul") | ds_nodash }}', #이 부분은 wsl이 아니라, 실행되는 워커컨테이너 내부임.
+        file_name='CardSubwayTime.csv'
     )
     ## 강의는 이것말고 추가로 SeoulApiToCsvOperator를 사용해서 다른 걸 구함. 
 
