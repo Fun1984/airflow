@@ -8,7 +8,7 @@ with DAG(
        dag_id='dags_python_with_postgres',
        start_date=pendulum.datetime(2026,1,3,tz='Asia/Seoul'),
        schedule=None,
-       carchup=False
+       catchup=False
 ) as dag : 
        def insrt_postgres(ip, port, dbname, user, passwd, **kwargs) :
               import psycopg2
