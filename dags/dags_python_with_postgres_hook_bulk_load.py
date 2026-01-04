@@ -1,7 +1,7 @@
 from airflow import DAG
 import pendulum
 from airflow.operators.python import PythonOperator
-from airflwo.providers.postgres.hooks.postgres import PostgresHook
+from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 
 with DAG (
