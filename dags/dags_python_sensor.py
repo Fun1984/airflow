@@ -27,7 +27,9 @@ with DAG(
         
         contents = json.loads(response.text)
         key_nm = list(contents.keys())[0]
+        print('key_nm', key_nm)
         row_data = contents.get(key_nm).get('row')
+        print('ROW_DATA', row_data)
         last_dt = row_data[0].get(base_dt_col)
         last_date = last_dt[0:4]+'-'+last_dt[4:6]+'-'+last_dt[6:8]
         # last_date = last_dt[:10]
