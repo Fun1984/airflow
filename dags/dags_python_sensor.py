@@ -22,7 +22,8 @@ with DAG(
         import json
         from dateutil import relativedelta 
         connection = BaseHook.get_connection(http_conn_id)
-        url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/{date.today().strftime('%Y%m')}"
+        # url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/{date.today().strftime('%Y%m')}"
+        url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/202512"
         response = requests.get(url)
         
         contents = json.loads(response.text)
