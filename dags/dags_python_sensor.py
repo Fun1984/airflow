@@ -20,9 +20,9 @@ with DAG(
     def check_api_update(http_conn_id, endpoint, base_dt_col, **kwargs):
         import requests
         import json
-        from dateutil import relativedelta
+        from dateutil import relativedelta 
         connection = BaseHook.get_connection(http_conn_id)
-        url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/{date.today().replace('-','')}"
+        url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/{date.today().strftime('%Y%m%d')}"
         response = requests.get(url)
         
         contents = json.loads(response.text)
