@@ -12,8 +12,9 @@ class CustomPostgresHook(BaseHook):
         self.host = airflow_conn.host
         self.user = airflow_conn.login
         self.password = airflow_conn.password
-        # self.dbname = airflow_conn.schema #dbname에 해당 파일 명 추가
-        self.dbname = 'cksdnd'
+        # self.dbname = airflow_conn.schema #dbname에 해당 파일 명 추가 #이 부분이 살짝 문제인게, dbname은 데이타베이스명임. 즉, 지금 airflow랑 cksdnd이 있는 데, 둘 중 하나 고르게 입력해줘야 됨. table명이 아니라.
+        # self.dbname = 'cksdnd'
+        self.dbname = airflow_conn.schema
         self.port = airflow_conn.port
 
         self.postgres_conn = psycopg2.connect(host=self.host, user=self.user, password=self.password, dbname=self.dbname, port=self.port)
