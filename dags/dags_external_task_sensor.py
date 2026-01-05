@@ -11,7 +11,7 @@ from airflow.providers.standard.sensors.external_task import ExternalTaskSensor
 ## 한버 재필기 해보기
 with DAG(
     dag_id='dags_external_task_sensor',
-    start_date=pendulum.datetime(2025,1,3, tz='Asia/Seoul'),
+    start_date=pendulum.datetime(2025,1,5, tz='Asia/Seoul'),
     schedule='0 7 * * *',
     catchup=False
 ) as dag:
