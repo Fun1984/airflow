@@ -22,7 +22,7 @@ class SeoulApiDateSensor(BaseSensorOperator):
         self.http_conn_id = 'openapi.seoul.go.kr'
         self.endpoint = '{{var.value.apikey_openapi_seoul_go_kr}}/json/' + dataset_nm + '/1/100/' + searched_ym
         self.base_dt_col = base_dt_col
-        self.dataset = day_off
+        self.day_off = day_off
 
     def poke(self, context):
         import requests
