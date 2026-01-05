@@ -8,7 +8,7 @@ from airflow.hooks.base import BaseHook
 '''
 class SeoulApiDateSensor(BaseSensorOperator):
 
-    template_fileds = ('endpoint',)
+    template_fields = ('endpoint',)
 
     def __init__(self, dataset_nm, base_dt_col, searched_ym, day_off=0, **kwargs):
         '''
