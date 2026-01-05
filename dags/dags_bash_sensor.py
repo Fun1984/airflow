@@ -48,6 +48,7 @@ with DAG(
 
     bash_task = BashOperator(
         task_id='bash_task',
+        env={'FILE':'/opt/airflow/files/TbSubwayStatus/{{data_interval_start.in_timezone("Asia/Seoul") | ds_nodash}}/CardSubwayTime.csv'},
         bash_command='echo "건수: `cat $FILE | wc -l`"'
     )
 
