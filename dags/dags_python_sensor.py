@@ -22,8 +22,8 @@ with DAG(
         import json
         from dateutil import relativedelta 
         connection = BaseHook.get_connection(http_conn_id)
-        # url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/{date.today().strftime('%Y%m')}"
-        url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/202512"
+        # url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/{date.today().strftime('%Y%m')}" #이 방식은 update가 아니라, create형태라서, 확인이 안되는 것임. 다른 방식으로 프로그래밍해야함. 
+        url = f"http://{connection.host}:{connection.port}/{endpoint}/1/100/202512" #보통 이런 경우는, 해당 api가 update되는 형태일 때 가능함. 
         response = requests.get(url)
         
         contents = json.loads(response.text)
