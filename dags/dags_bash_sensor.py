@@ -1,7 +1,7 @@
 import pendulum
 
 from airflow.sdk import DAG
-from airflow.providers.standard.operators.bash import BashOperator
+from airflow.sdk.bases.operator import BashOperator
 from airflow.providers.standard.sensors.bash import BashSensor
 
 # Airflow 2.10.5 이하 버전
@@ -48,7 +48,6 @@ with DAG(
 
     bash_task = BashOperator(
         task_id='bash_task',
-        env={'FILE':'/opt/airflow/files/TbSubwayStatus/{{data_interval_start.in_timezone("Asia/Seoul") | ds_nodash}}/CardSubwayTime.csv'},
         bash_command='echo "건수: `cat $FILE | wc -l`"'
     )
 
