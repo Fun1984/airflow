@@ -1,7 +1,7 @@
 import pendulum
 
 from airflow.sdk import DAG
-from airflow.sdk.bases.operator import BashOperator
+from airflow.providers.standard.operators.bash import BashOperator
 from airflow.providers.standard.sensors.bash import BashSensor
 
 # Airflow 2.10.5 이하 버전
