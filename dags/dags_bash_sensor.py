@@ -19,7 +19,7 @@ with DAG(
     sensor_task_by_poke = BashSensor(
         task_id='sensor_task_by_poke',
         env={'FILE':'/opt/airflow/files/TbSubwayStatus/{{data_interval_start.in_timezone("Asia/Seoul") | ds_nodash}}/CardSubwayTime.csv'},
-        bash_command=f'''exho $FILE &&
+        bash_command=f'''echo $FILE &&
                         if [ -f $FILE ]; then
                             exit 0
                         else
@@ -34,7 +34,7 @@ with DAG(
     sensor_task_by_reschedule = BashSensor(
         task_id='sensor_task_by_reschedule',
         env={'FILE':'/opt/airflow/files/TbSubwayStatus/{{data_interval_start.in_timezone("Asia/Seoul") | ds_nodash}}/CardSubwayTime.csv'},
-        bash_command=f'''exho $FILE &&
+        bash_command=f'''echo $FILE &&
                         if [ -f $FILE ]; then
                             exit 0
                         else
