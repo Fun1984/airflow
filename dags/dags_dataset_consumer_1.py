@@ -1,7 +1,12 @@
-from airflow import Dataset
-from airflow import DAG
-from airflow.operators.bash import BashOperator
 import pendulum
+# Airflow 3.0 부터 아래 경로로 import 합니다.
+from airflow.providers.standard.operators.bash import BashOperator
+from airflow.sdk import DAG, Asset
+
+# Airflow 2.10.5 이하 버전에서 실습시 아래 경로에서 import 하세요.
+#from airflow.operators.bash import BashOperator
+#from airflow import DAG
+#from airflow import Dataset
 
 dataset_dags_dataset_producer_1 = Dataset("dags_dataset_producer_1")
 
