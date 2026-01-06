@@ -8,7 +8,7 @@ from airflow.sdk import DAG, Asset
 #from airflow import DAG
 #from airflow import Dataset
 
-dataset_dags_dataset_producer_2 = Asset("dags_dataset_prodcer_2")
+dataset_dags_dataset_producer_2 = Asset("dags_dataset_producer_2")
 
 with DAG(
     dag_id='dags_dataset_producer_2',
