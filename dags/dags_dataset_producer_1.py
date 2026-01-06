@@ -18,5 +18,6 @@ with DAG(
 ) as dag:
     bash_task=BashOperator(
         task_id='bash_task',
+        outlets=[dataset_dags_dataset_producer_1], #요 부분 새로 3.0에서 추가
         bash_command='echo "producer_1 수행 완료"'
     )
