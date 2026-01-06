@@ -37,7 +37,7 @@ class SeoulApiDateSensor(BaseSensorOperator):
         contents = json.loads(response.text)
         key_nm = list(contents.keys())[0]
         # print('key_nm', key_nm)
-        row_data = contents.get(key_nm).get('row')
+        row_data = contents.get(key_nm).get('row') #전월 기준으로 뽑아야 함
         # print('ROW_DATA', row_data)
         last_dt = row_data[0].get(self.base_dt_col)
         last_date = last_dt[0:4]+'-'+last_dt[4:6]+'-'+last_dt[6:8]

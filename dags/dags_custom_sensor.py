@@ -15,8 +15,8 @@ with DAG(
     CardSubwayTime_sensor = SeoulApiDateSensor(
         task_id='CardSubwayTime_sensor',
         dataset_nm='CardSubwayTime',
-        base_dt_col='JOB_YMD',
-        searched_ym='202512',
+        base_dt_col='JOB_YMD', #이건 최신화 시기가 적혀있음. 하지만, 대체로 수정이 적을 것이고 한 번 하면 끝일 것이기에, searched_ym을 잘 잡는 게 좋음
+        searched_ym='202512', #이건 별도로 custom한 것임. 해당 api의 경우, 확인할 년월 데이터를 넣어줘야 함. 전월 데이터가 최신 데이터임. 
         day_off=-30,
         poke_interval=600,
         mode='reschedule'
