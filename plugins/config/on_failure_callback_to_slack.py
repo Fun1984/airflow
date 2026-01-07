@@ -5,11 +5,16 @@ def on_failure_callback_to_slack(context):
     dag_id = ti.dag_id
     task_id = ti.task_id
     err_msg = context.get('exception')
-    batch_date = context.get('data_interval_start').in_timezone('Asia/Seoul')
+    batch_date = context.get('data_interval_end').in_timezone('Asia/Seoul')
 
     slack_hook = SlackWebhookHook(slack_webhook_conn_id='conn_slack_airflow_bot')
-    text="실패 알람"
-    blocks= [
+    text = "실패 알람"
+    
+    MAX_ERR_LEN = 1800
+    safe_err_msg = str(err_msg)[:MAX_ERR_LEN] if err_msg else "No error message"
+    safe_batch_date = batch_date or "N/A"
+    
+    blocks = [
         {
 			"type": "section",
 			"text": {
@@ -22,11 +27,11 @@ def on_failure_callback_to_slack(context):
             "fields": [
                 {
                     "type": "mrkdwn",
-                    "text": f"*배치 시간*: {batch_date}"
+                    "text": f"*배치 시간*: {safe_batch_date}"
                 },
                 {
                     "type": "mrkdwn",
-                    "text": f"*에러 내용*: {err_msg}"
+                    "text": f"*에러 내용*: {safe_err_msg}"
                 }
             ]
         }
