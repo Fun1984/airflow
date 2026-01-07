@@ -31,7 +31,7 @@ def on_failure_callback_to_slack(context):
                 },
                 {
                     "type": "mrkdwn",
-                    "text": f"*에러 내용*: {safe_err_msg}"
+                    "text": f"*에러 내용*: ```{safe_err_msg}```"
                 }
             ]
         }
