@@ -11,6 +11,7 @@ with DAG(
         'pool':'pool_small'
     }
 ) as dag:
+        
     bash_task_1 = BashOperator(
         task_id='bash_task_1',
         bash_command='sleep 30',
@@ -20,19 +21,18 @@ with DAG(
     bash_task_2 = BashOperator(
         task_id='bash_task_2',
         bash_command='sleep 30',
-        priority_weight=1
+        priority_weight=5
     )
 
     bash_task_3 = BashOperator(
         task_id='bash_task_3',
         bash_command='sleep 30',
-        priority_weight=2
+        priority_weight=4
     )
 
     bash_task_4 = BashOperator(
         task_id='bash_task_4',
-        bash_command='sleep 30',
-        priority_weight=4
+        bash_command='sleep 30'
     )
 
     bash_task_5 = BashOperator(
@@ -44,23 +44,21 @@ with DAG(
         task_id='bash_task_6',
         bash_command='sleep 30'
     )
-    
+
     bash_task_7 = BashOperator(
         task_id='bash_task_7',
-        bash_command='sleep 30'
-    )
+        bash_command='sleep 30',
+        priority_weight=7
+    ) 
 
     bash_task_8 = BashOperator(
         task_id='bash_task_8',
         bash_command='sleep 30',
-        priority_weight=3
-    )
+        priority_weight=8
+    ) 
 
-    bash_task_1
-    bash_task_2
-    bash_task_3
-    bash_task_4
-    bash_task_5
-    bash_task_6
-    bash_task_7
-    bash_task_8
+    bash_task_9 = BashOperator(
+        task_id='bash_task_9',
+        bash_command='sleep 30',
+        priority_weight=9
+    ) 
