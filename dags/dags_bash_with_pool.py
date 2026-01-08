@@ -55,3 +55,12 @@ with DAG(
         bash_command='sleep 30',
         priority_weight=3
     )
+
+    bash_task_1
+    bash_task_2
+    bash_task_3
+    bash_task_4
+    bash_task_5
+    bash_task_6
+    bash_task_7
+    bash_task_8
