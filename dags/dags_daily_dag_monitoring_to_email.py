@@ -80,7 +80,7 @@ with DAG(
         conn_id='my-email-conn',
         to=email_lst,
         subject="{{ti.xcom_pull(key='subject')}}",
-        html_content="{{ti.xcom_pull(key='return_value')}}"
+        html_content="{{ti.xcom_pull(task_ids='get_daily_monitoring_rslt_task',key='return_value')}}"
     )
 
     get_daily_monitoring_rslt_task() >> send_email
