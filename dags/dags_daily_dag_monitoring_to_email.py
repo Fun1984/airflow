@@ -77,6 +77,7 @@ with DAG(
 
     send_email = EmailOperator(
         task_id='send_email',
+        conn_id='my-email-conn',
         to=email_lst,
         subject="{{ti.xcom_pull(key='subject')}}",
         html_content="{{ti.xcom_pull(key='return_value')}}"
