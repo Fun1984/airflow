@@ -70,10 +70,10 @@ with DAG(
                     ] + return_blocks
                     return return_blocks
                 
-                send_to_slack = SlackWebhookOperator(
-                    task_id = 'send_to_slack',
-                    slack_webhook_conn_id='conn_slack_airflow_bot',
-                    blocks='{{ ti.xcom_pull(task_ids="get_daily_monitoring_rslt_task") }}'
-                )
+    send_to_slack = SlackWebhookOperator(
+        task_id = 'send_to_slack',
+        slack_webhook_conn_id='conn_slack_airflow_bot',
+        blocks='{{ ti.xcom_pull(task_ids="get_daily_monitoring_rslt_task") }}'
+    )
 
-                get_daily_monitoring_rslt_task() >> send_to_slack
+    get_daily_monitoring_rslt_task() >> send_to_slack
