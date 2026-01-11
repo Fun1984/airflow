@@ -1,16 +1,25 @@
 def divider():
-    return {
-        "type": "builer"
+    return     {
+        "type": "divider"
     }
 
 def mrkdwn_text(msg):
-    return {
+    return  {
         "type": "mrkdwn",
         "text": f"{msg}"
     }
 
+
 def section_text(msg):
-    return {
+    return    {
         "type": "section",
         "text": mrkdwn_text(msg)
+    }
+
+
+
+def fields(lst):
+    return   {
+        "type": "section",
+        "fields": lst
     }
