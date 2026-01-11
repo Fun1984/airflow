@@ -21,7 +21,7 @@ with DAG(
             with closing(conn.cursor()) as cursor:
                 with open('/opt/airflow/files/sqls/daily_dag_monitoring.sql', 'r') as sql_file:
                     cursor.execute("SET TIME ZONE 'Asia/Seoul';")
-                    sql= '\n'.join(sql_file.readlines())
+                    sql = '\n'.join(sql_file.readlines())
                     cursor.execute(sql)
                     rslt = cursor.fetchall()
                     rslt = pd.DataFrame(rslt)
@@ -35,12 +35,12 @@ with DAG(
                         for idx, row in failed_df.iterrows():
                             return_blocks.append(sb.section_text(f"*DAG:* {row['dag_id']}\n*최근 실패일자:* {row['last_failed_date']}\n*마지막 성공일자:* {'없음' if str(row['last_success_date']) =='NaT' else row['last_success_date']}"))
                     else:
-                        return_blocks.appned(sb.section_text("없음"))
+                        return_blocks.append(sb.section_text("없음"))
                     return_blocks.append(sb.divider())
 
                     # 2) 미수행 대상
                     skipped_df = rslt.query("(run_cnt==0)")
-                    return_blocks.appned(sb.section_text("*3 미수행 대상*"))
+                    return_blocks.append(sb.section_text("*3 미수행 대상*"))
                     if not skipped_df.empty:
                         for idx, row in skipped_df.itterows():
                             return_blocks.append(sb.section_text(f"*DAG:* {row['dag_id']}\n*예정일자:* {row['next_dagrun_data_interval_end']}"))
