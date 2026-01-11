@@ -1,5 +1,5 @@
 from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
-from airflow.providers.postgres.hook.postgres import PostgresHook
+from airflow.providers.postgres.hooks.postgres import PostgresHook
 from airflow.decorators import task
 import config.slack_block_builder as sb
 from airflow import DAG
