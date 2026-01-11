@@ -7,7 +7,9 @@ import pandas as pd
 from airflow.sdk import DAG, Variable, task
 
 
-email_str = Variable
+email_str = Variable.get("email_target")
+email_lst = [email.strip() for email in email_str.split(',')]
+
 with DAG(
     dag_id='dags_daily_dag_monitoring_to_email',
     start_date=pendulum.datetime(2026,1,11,tz='Asia/Seoul'),
