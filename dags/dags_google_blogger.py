@@ -21,7 +21,7 @@ with DAG(
     def publish():
         # 1. Airflow Connection 로드
         conn = BaseHook.get_connection("google_blogger")
-        extras = json.loads(conn.extra_dejson or "{}")
+        extras = conn.extra_dejson or {}
 
         # 2. Credentials 생성
         creds = Credentials(
