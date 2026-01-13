@@ -22,7 +22,7 @@ with DAG(
         # 1. Airflow Connection 로드
         conn = BaseHook.get_connection("google_blogger")
         extras = conn.extra_dejson or {}
-
+        print(extras)
         # 2. Credentials 생성
         creds = Credentials(
             token=None,
