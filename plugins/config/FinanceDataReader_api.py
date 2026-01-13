@@ -10,6 +10,8 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
     date = pendulum.now('Asia/Seoul')
     before_year_info_date = date.subtract(years=1).replace(month=12, day=1).format("YYYY-MM-DD")
     yyyymmdd = '2026-01-13' #새벽에 돌리면 작동 안함
+    print('새벽에 돌릴 시, 이전 날짜로 잡을 것')
+
     column_lst = ['Open', 'High', 'Low', 'Close', 'Volume', 'Change', 'Code', '매출액',
        '영업이익', '영업이익(발표기준)', '세전계속사업이익', '당기순이익', '당기순이익(지배)', '당기순이익(비지배)',
        '자산총계', '부채총계', '자본총계', '자본총계(지배)', '자본총계(비지배)', '자본금', '영업활동현금흐름',
@@ -86,7 +88,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         return_prompt_lst.append(chatgpt_prompt)
         fluctuation_rate_lst.append(fluc_rate)
 
-        if idx == cnt_thing-1:
+        if idx == cnt_thing:
             break
-        print(len(ticker_name_lst), len(fluctuation_rate_lst), len(return_prompt_lst))
+    
     return ticker_name_lst, fluctuation_rate_lst, return_prompt_lst

@@ -7,7 +7,7 @@ def get_chatgpt_response(api_key, prompt, temperature=0.7, model='gpt-3.5-turbo'
     data={
         "model": model,
         "messages": [{"role": "system", "content":"You are a reporter"},
-                     {"role": "user", "content":"prompt"}
+                     {"role": "user", "content":f"{prompt}"}
                      ],
         "temperature": temperature
     }
