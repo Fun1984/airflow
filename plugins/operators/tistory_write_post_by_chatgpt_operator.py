@@ -47,6 +47,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
 
         market = 'KOSPI'
         for idx, prompt in enumerate(tot_prompt):
+            print('TTT_1')
             temperature = randrange(10,100)/100     # 0.1 ~ 1 사이 
             ticker_name = tot_ticker_name_lst[idx]
             print(f'ticker: {ticker_name}, temperature:{temperature}')      # temperature 확인용 로깅
@@ -60,10 +61,10 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
 
             if idx >= self.post_cnt_per_market:
                 market = 'KOSDAQ'
-
+            print('TTT_2')
             publish(access_token=self.blogger_access_token,
                              blog_name='Please_Jebal_DaeRa',
                              title=f'{yyyy}/{mm}/{dd} {hh}시 {market} 급등 {fluctuation_rate}% {ticker_name} 주목!',
                              content=chatgpt_resp,
                              tag_lst=[f'{market}급등','급등주',ticker_name])
-            
+            print('TTT_3')
