@@ -31,17 +31,20 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         try :        
             print(f"Good_2_{ticker}_{yyyymmdd}")
             df_1 = fdr.DataReader(f'{ticker}', yyyymmdd)
-
             df_1['Code'] = f'{ticker}'
-            df_2 = fdr.SnapDataReader(f'NAVER/FINSTATE/{ticker}')
+            print('df_1', df_1)
 
+            df_2 = fdr.SnapDataReader(f'NAVER/FINSTATE/{ticker}')
             df_2 = df_2[df_2.index.strftime('%Y-%m-%d') == before_year_info_date] 
             df_2['Code'] = f'{ticker}'
+            print('df_2', df_2)
+
             rslt_df = pd.merge(df_1, df_2, on='Code', how='inner')
+            print('rslt_df', rslt_df)
 
             rslt_tot_df = pd.concat([rslt_tot_df, rslt_df], ignore_index = True)
             cnt = cnt + 1
- 
+            print('rslt_tot_df: ',rslt_tot_df)
         except : 
             pass
         if cnt == 5 :
