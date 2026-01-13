@@ -1,0 +1,42 @@
+# from airflow.hooks.base import BaseHook
+
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+
+def publish(access_token, blog_name, title, content, tag_lst):
+    # 1. Airflow Connection 로드
+    # conn = BaseHook.get_connection("google_blogger")
+    # extras = conn.extra_dejson or {}
+    # print(extras)
+
+    # 2. Credentials 생성
+    creds = Credentials(
+        token=None,
+        refresh_token=access_token["refresh_token"],
+        token_uri=access_token["token_uri"],
+        client_id=access_token["client_id"],
+        client_secret=access_token["client_secret"],
+    )
+
+    # 3. Blogger API Client
+    service = build("blogger", "v3", credentials=creds)
+
+    # 4. 게시글 정의
+    post = {
+        "title": f"{title}",
+        "content": f"""
+            <p>이 글은 Airflow DAG에서 자동으로 발행되었습니다.</p>
+            <p>Connection 기반 OAuth 인증 테스트 성공.</p>
+        """
+    }
+
+    # 5. 게시
+    response = service.posts().insert(
+        blogId=access_token["blog_id"],
+        body=post,
+        isDraft=False
+    ).execute()
+
+    # 6. 로그 출력
+    print(f"Published post id: {response['id']}")
+    print(f"Post URL: {response.get('url')}")
