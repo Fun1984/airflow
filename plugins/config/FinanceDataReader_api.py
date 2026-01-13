@@ -48,6 +48,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
             break
     
     tot_df = rslt_tot_df.sort_values(by=['Change'], ascending=False)
+    
     for idx, row in tot_df.iterrows():
         ticker_name = tot_df(row['Code'])
         fluc_rate = row['Change']
@@ -56,12 +57,15 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         low_value = row['Low']
         end_value = row['Close']
         volume = row['Volume']
-        bps = row['BPS(원)']
-        per = row['PER(배)']
-        pbr = row['PBR(배)']
-        eps = row['EPS(원)']
-        div = row['현금배당수익률']
-        dps = row['현금DPS(원)']
+
+        bps = '' if pd.isna(row['BPS(원)']) else row['BPS(원)']
+        per = '' if pd.isna(row['PER(배)']) else row['PER(배)']
+        pbr = '' if pd.isna(row['PBR(배)']) else row['PBR(배)']
+        eps = '' if pd.isna(row['EPS(원)']) else row['EPS(원)']
+        div = '' if pd.isna(row['현금배당수익률']) else row['현금배당수익률']
+        dps = '' if pd.isna(row['현금DPS(원)']) else row['현금DPS(원)']
+        # print('DPS :' , dps)
+
         chatgpt_prompt = f'''
         오늘 KOSPI에서 {round(fluc_rate, 2)}%로 상승으로 마감한 {ticker_name}에 대한 정보야.
         {ticker_name}에 대한 회사 소개를 리포트로 만들어줘.
@@ -79,11 +83,14 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         DIV: {div}
         DPS: {dps}
         '''
-        
+        print(chatgpt_prompt)
+
         ticker_name_lst.append(ticker_name)
         return_prompt_lst.append(chatgpt_prompt)
         fluctuation_rate_lst.append(fluc_rate)
 
         if idx >= cnt_thing-1:
             break
+
+        print('BEFORE_____' , ticker_name_lst, '++',fluctuation_rate_lst,'++', return_prompt_lst)
     return ticker_name_lst, fluctuation_rate_lst, return_prompt_lst
