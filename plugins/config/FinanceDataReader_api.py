@@ -9,7 +9,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
     
     date = pendulum.now('Asia/Seoul')
     before_year_info_date = date.subtract(years=1).replace(month=12, day=1).format("YYYY-MM-DD")
-    yyyymmdd = '2026-01-13' #새벽에 돌리면 작동 안함
+    # yyyymmdd = '2026-01-13' #새벽에 돌리면 작동 안함
     print('새벽에 돌릴 시, 이전 날짜로 잡을 것')
 
     column_lst = ['Open', 'High', 'Low', 'Close', 'Volume', 'Change', 'Code', '매출액',
@@ -40,8 +40,8 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
 
         except : 
             pass
-        if cnt == 5 : ##설정 안하면, 확인된 거 전부 돌림. (2시간 이상 소요)
-            break
+        # if cnt == 5 : ##설정 안하면, 확인된 거 전부 돌림. (2시간 이상 소요)
+        #     break
     
     tot_df = rslt_tot_df.sort_values(by=['Change'], ascending=False)
     tot_df.reset_index(inplace=True)
@@ -57,12 +57,12 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         end_value = row['Close']
         volume = row['Volume']
 
-        bps = '' if pd.isna(row['BPS(원)']) else row['BPS(원)']
-        per = '' if pd.isna(row['PER(배)']) else row['PER(배)']
-        pbr = '' if pd.isna(row['PBR(배)']) else row['PBR(배)']
-        eps = '' if pd.isna(row['EPS(원)']) else row['EPS(원)']
-        div = '' if pd.isna(row['현금배당수익률']) else row['현금배당수익률']
-        dps = '' if pd.isna(row['현금DPS(원)']) else row['현금DPS(원)']
+        bps = '없음' if pd.isna(row['BPS(원)']) else row['BPS(원)']
+        per = '없음' if pd.isna(row['PER(배)']) else row['PER(배)']
+        pbr = '없음' if pd.isna(row['PBR(배)']) else row['PBR(배)']
+        eps = '없음' if pd.isna(row['EPS(원)']) else row['EPS(원)']
+        div = '없음' if pd.isna(row['현금배당수익률']) else row['현금배당수익률']
+        dps = '없음' if pd.isna(row['현금DPS(원)']) else row['현금DPS(원)']
 
 
         chatgpt_prompt = f'''
