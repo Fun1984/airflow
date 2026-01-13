@@ -30,7 +30,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
 
 
         now =  pendulum.now('Asia/Seoul')
-        now_yyyymmmdd = now.strftime('YYYY-MM-DD')
+        now_yyyymmmdd = now.strftime('%Y-%m-%d')
         yyyy = now.year
         mm = now.month
         dd = now.day
