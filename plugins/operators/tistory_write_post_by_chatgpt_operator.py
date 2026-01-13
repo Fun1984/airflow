@@ -1,6 +1,6 @@
 from config.chatgpt import get_chatgpt_response
 from config.FinanceDataReader_api import get_prompt_for_chatgpt
-from plugins.config.blogger import publish
+from config.blogger import publish
 import pendulum
 from random import randrange
 
@@ -15,7 +15,7 @@ from airflow.sdk import Variable
 
 
 class TistoryWritePostByChatgptOperator(BaseOperator):
-    
+
     def __init__(self, post_cnt_per_market: int, **kwargs):
         super().__init__(**kwargs)
         self.post_cnt_per_market = post_cnt_per_market
