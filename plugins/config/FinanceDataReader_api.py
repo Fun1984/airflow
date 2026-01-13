@@ -55,7 +55,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
     print(tot_df)
     for idx, row in tot_df.iterrows():
         print(11111111111111)
-        ticker_name = tot_df(row['Code'])
+        ticker_name = row['Code'] #Ticker나 기업명 추가 필요
         fluc_rate = row['Change']
         open_value = row['Open']
         high_value = row['High']
@@ -72,9 +72,10 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         print('DPS :' , dps)
 
         chatgpt_prompt = f'''
-        오늘 KOSPI에서 {round(fluc_rate, 2)}%로 상승으로 마감한 {ticker_name}에 대한 정보야.
-        {ticker_name}에 대한 회사 소개를 리포트로 만들어줘.
-        그리고 아래 정보들도 포함해서 리포트로 만들어줘.
+        오늘 KOSPI에서 {round(fluc_rate, 2)}%로 상승으로 마감한 종목코드 {ticker_name}에 대한 정보야.
+        종목코드 {ticker_name}에 대한 회사 소개를 리포트로 만들어줘.
+        종목코드를 기준으로 회사명을 찾아내줘
+        그리고 아래 정보들도 포함해서 리포트로 만들어줘. 
         등락률: {round(fluc_rate, 2)}
         시가: {open_value}
         고가: {high_value}
