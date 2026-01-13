@@ -14,7 +14,7 @@ import json
 
 with DAG(
     dag_id="publish_blogger_post",
-    start_date=pendulum.datetime(2025, 1, 1, tz="Asia/Seoul"),
+    start_date=pendulum.datetime(2025, 1, 13, tz="Asia/Seoul"),
     schedule=None,
     catchup=False,
     tags=["blogger", "google", "publish"]

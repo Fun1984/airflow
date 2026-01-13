@@ -14,8 +14,6 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
     # tot_df.reset_index(inplace=True)
     date = pendulum.now('Asia/Seoul')
     before_year_info_date = date.subtract(years=1).replace(month=12, day=1).format("YYYY-MM-DD")
-    print("date", date)
-    print("before___", before_year_info_date)
 
     column_lst = ['Open', 'High', 'Low', 'Close', 'Volume', 'Change', 'Code', '매출액',
        '영업이익', '영업이익(발표기준)', '세전계속사업이익', '당기순이익', '당기순이익(지배)', '당기순이익(비지배)',
@@ -27,31 +25,29 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
     df = fdr.StockListing('KRX')
     cnt = 0
     rslt_tot_df = pd.DataFrame(columns=column_lst)
-    print("Good_1")
+
 
     for idx, ticker in enumerate(df['Code']) :
         try :        
             print(f"Good_2_{ticker}_{yyyymmdd}")
             df_1 = fdr.DataReader(f'{ticker}', yyyymmdd)
-            print(df_1)
+
             df_1['Code'] = f'{ticker}'
             df_2 = fdr.SnapDataReader(f'NAVER/FINSTATE/{ticker}')
-            print(df_2)
+
             df_2 = df_2[df_2.index == before_year_info_date] 
             df_2['Code'] = f'{ticker}'
             rslt_df = df_1.merge(df_2, how='inner')
-            print(rslt_df)
+
             rslt_tot_df = pd.concat([rslt_tot_df, rslt_df], ignore_index = True)
             cnt = cnt + 1
-            print(f"Good_2_{cnt}")
+ 
         except : 
             pass
         if cnt == 5 :
             break
     
-    print(f"Good_3")
     tot_df = rslt_tot_df.sort_values(by=['Change'], ascending=False)
-    print(f"Good_4")
     for idx, row in tot_df.iterrows():
         ticker_name = tot_df(row['Code'])
         fluc_rate = row['Change']
@@ -90,5 +86,4 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
 
         if idx >= cnt_thing-1:
             break
-    print(f"Good_5")
     return ticker_name_lst, fluctuation_rate_lst, return_prompt_lst
