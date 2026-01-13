@@ -25,8 +25,9 @@ def publish(access_token, blog_name, title, content, tag_lst):
     post = {
         "title": f"{title}",
         "content": f"""
-            <p>이 글은 Airflow DAG에서 자동으로 발행되었습니다.</p>
-            <p>Connection 기반 OAuth 인증 테스트 성공.</p>
+            <p><h2>{blog_name}</h2></p>
+            <p>{content}</p>
+            <p>{tag_lst}</p>
         """
     }
 
