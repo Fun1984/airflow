@@ -45,6 +45,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
             pass
         if cnt == 10 :
             break
+    
     print(f"Good_3")
     tot_df = rslt_tot_df.sort_values(by=['Change'], ascending=False)
     print(f"Good_4")

@@ -37,7 +37,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         hh = now.hour
         # kospi_ticker_name_lst, kospi_fluctuation_rate_lst, prompt_of_kospi_top_n_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KRX', cnt=self.post_cnt_per_market)
         # kosdaq_ticker_name_lst, kosdaq_fluctuation_rate_lst, prompt_of_kosdaq_top_n_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KOSDAQ', cnt=self.post_cnt_per_market)
-        krx_ticker_name_lst, krx_fluctuation_rate_lst, prompt_of_krx_top_n_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KRX', cnt=self.post_cnt_per_market)
+        krx_ticker_name_lst, krx_fluctuation_rate_lst, prompt_of_krx_top_n_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KRX', cnt_thing=self.post_cnt_per_market)
         
         tot_ticker_name_lst = krx_ticker_name_lst #+ kosdaq_ticker_name_lst
         tot_fluctuation_rate_lst = krx_fluctuation_rate_lst #+ kosdaq_fluctuation_rate_lst
