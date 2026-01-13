@@ -28,7 +28,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
     def execute(self, context):
         chatgpt_api_key = Variable.get('chatgpt_api_key')
 
-        print('chatgpt_api_key :', chatgpt_api_key)
+        # print('chatgpt_api_key :', chatgpt_api_key)
         print('google_blogger :', self.blogger_access_token)
 
         now =  pendulum.now('Asia/Seoul')

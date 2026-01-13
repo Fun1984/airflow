@@ -10,6 +10,7 @@ def publish(access_token, blog_name, title, content, tag_lst):
     # print(extras)
 
     # 2. Credentials 생성
+    print('ChatGPT_1')
     creds = Credentials(
         token=None,
         refresh_token=access_token["refresh_token"],
@@ -17,11 +18,13 @@ def publish(access_token, blog_name, title, content, tag_lst):
         client_id=access_token["client_id"],
         client_secret=access_token["client_secret"],
     )
+    print('ChatGPT_2')
 
     # 3. Blogger API Client
     service = build("blogger", "v3", credentials=creds)
 
     # 4. 게시글 정의
+    print('ChatGPT_3')
     post = {
         "title": f"{title}",
         "content": f"""
@@ -30,7 +33,7 @@ def publish(access_token, blog_name, title, content, tag_lst):
             <p>{tag_lst}</p>
         """
     }
-
+    print('ChatGPT_4')
     # 5. 게시
     response = service.posts().insert(
         blogId=access_token["blog_id"],
@@ -38,6 +41,7 @@ def publish(access_token, blog_name, title, content, tag_lst):
         isDraft=False
     ).execute()
 
+    print('ChatGPT_5')
     # 6. 로그 출력
     print(f"Published post id: {response['id']}")
     print(f"Post URL: {response.get('url')}")
