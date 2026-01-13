@@ -48,7 +48,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
             break
     
     tot_df = rslt_tot_df.sort_values(by=['Change'], ascending=False)
-    
+    print(tot_df)
     for idx, row in tot_df.iterrows():
         print(11111111111111)
         ticker_name = tot_df(row['Code'])
