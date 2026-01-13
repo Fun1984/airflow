@@ -13,7 +13,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
     # tot_df = tot_df.sort_values(by=['등락률'], ascending=False)
     # tot_df.reset_index(inplace=True)
     date = pendulum.now('Asia/Seoul')
-    before_year_info_date = date.substrack(years=1).replace(month=12, day=1).format("YYYY-MM-DD")
+    before_year_info_date = date.subtract(years=1).replace(month=12, day=1).format("YYYY-MM-DD")
     print("date", date)
     print("before___", before_year_info_date)
 
