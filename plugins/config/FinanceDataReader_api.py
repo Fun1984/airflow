@@ -38,8 +38,8 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
 
         except : 
             pass
-        # if cnt == 5 : ##설정 안하면, 확인된 거 전부 돌림. (2시간 이상 소요)
-        #     break
+        if cnt == 5 : ##설정 안하면, 확인된 거 전부 돌림. (2시간 이상 소요)
+            break
     
     tot_df = rslt_tot_df.sort_values(by=['Change'], ascending=False)
     tot_df.reset_index(inplace=True)
