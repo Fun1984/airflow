@@ -45,7 +45,8 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         tot_ticker_name_lst = krx_ticker_name_lst #+ kosdaq_ticker_name_lst
         tot_fluctuation_rate_lst = krx_fluctuation_rate_lst #+ kosdaq_fluctuation_rate_lst
         tot_prompt = prompt_of_krx_top_n_lst #+ prompt_of_kosdaq_top_n_lst
-        print('TTTTTT_4')
+        print('TTTTTT_4', tot_prompt)
+
         market = 'KOSPI'
         for idx, prompt in enumerate(tot_prompt):
             print('TTT_1')
