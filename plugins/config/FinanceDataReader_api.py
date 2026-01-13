@@ -31,7 +31,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
 
     for idx, ticker in enumerate(df['Code']) :
         try :        
-            print(f"Good_2_{cnt}")
+            print(f"Good_2_{ticker}_{yyyymmdd}")
             df_1 = fdr.DataReader(f'{ticker}', yyyymmdd)
             print(df_1)
             df_1['Code'] = f'{ticker}'
