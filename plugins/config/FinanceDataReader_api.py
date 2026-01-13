@@ -6,15 +6,10 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
     ticker_name_lst = []
     fluctuation_rate_lst = []
     return_prompt_lst = []
-    # ohlcv_df = stock.get_market_ohlcv(date=yyyymmdd, market=market) # (market: KOSPI/KOSDAQ/KONEX/ALL)
-    # fund_df = stock.get_market_fundamental(yyyymmdd, market=market)
-
-    # tot_df = ohlcv_df.join(fund_df, how='inner')
-    # tot_df = tot_df.sort_values(by=['등락률'], ascending=False)
-    # tot_df.reset_index(inplace=True)
+    
     date = pendulum.now('Asia/Seoul')
     before_year_info_date = date.subtract(years=1).replace(month=12, day=1).format("YYYY-MM-DD")
-    yyyymmdd = '2026-01-13'
+    # yyyymmdd = '2026-01-13' #새벽에 돌리면 작동 안함
     column_lst = ['Open', 'High', 'Low', 'Close', 'Volume', 'Change', 'Code', '매출액',
        '영업이익', '영업이익(발표기준)', '세전계속사업이익', '당기순이익', '당기순이익(지배)', '당기순이익(비지배)',
        '자산총계', '부채총계', '자본총계', '자본총계(지배)', '자본총계(비지배)', '자본금', '영업활동현금흐름',
@@ -26,36 +21,32 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
     cnt = 0
     rslt_tot_df = pd.DataFrame(columns=column_lst)
 
-
     for idx, ticker in enumerate(df['Code']) :
         try :        
-            print(f"Good_2_{ticker}_{yyyymmdd}")
+
             df_1 = fdr.DataReader(f'{ticker}', yyyymmdd)
             df_1['Code'] = f'{ticker}'
-            print('df_1', df_1)
 
             df_2 = fdr.SnapDataReader(f'NAVER/FINSTATE/{ticker}')
             df_2 = df_2[df_2.index.strftime('%Y-%m-%d') == before_year_info_date] 
             df_2['Code'] = f'{ticker}'
-            print('df_2', df_2)
 
             rslt_df = pd.merge(df_1, df_2, on='Code', how='inner')
-            print('rslt_df', rslt_df)
 
             rslt_tot_df = pd.concat([rslt_tot_df, rslt_df], ignore_index = True)
             cnt = cnt + 1
-            print('rslt_tot_df: ',rslt_tot_df)
+
         except : 
             pass
-        if cnt == 5 :
-            break
+        # if cnt == 5 : ##설정 안하면, 확인된 거 전부 돌림. (2시간 이상 소요)
+        #     break
     
     tot_df = rslt_tot_df.sort_values(by=['Change'], ascending=False)
     tot_df.reset_index(inplace=True)
 
-    print(tot_df)
+    # print(tot_df)
     for idx, row in tot_df.iterrows():
-        # print(11111111111111)
+
         ticker_name = row['Code'] #Ticker나 기업명 추가 필요
         fluc_rate = row['Change']
         open_value = row['Open']
@@ -63,14 +54,14 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         low_value = row['Low']
         end_value = row['Close']
         volume = row['Volume']
-        # print(2222222222222222222)
+
         bps = '' if pd.isna(row['BPS(원)']) else row['BPS(원)']
         per = '' if pd.isna(row['PER(배)']) else row['PER(배)']
         pbr = '' if pd.isna(row['PBR(배)']) else row['PBR(배)']
         eps = '' if pd.isna(row['EPS(원)']) else row['EPS(원)']
         div = '' if pd.isna(row['현금배당수익률']) else row['현금배당수익률']
         dps = '' if pd.isna(row['현금DPS(원)']) else row['현금DPS(원)']
-        # print('DPS :' , dps)
+
 
         chatgpt_prompt = f'''
         오늘 KOSPI에서 {round(fluc_rate, 2)}%로 상승으로 마감한 종목코드 {ticker_name}에 대한 정보야.
@@ -95,7 +86,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         return_prompt_lst.append(chatgpt_prompt)
         fluctuation_rate_lst.append(fluc_rate)
 
-        if idx >= cnt_thing-1:
+        if idx == cnt_thing-1:
             break
 
     return ticker_name_lst, fluctuation_rate_lst, return_prompt_lst
