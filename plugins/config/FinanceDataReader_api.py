@@ -35,9 +35,9 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
             df_1['Code'] = f'{ticker}'
             df_2 = fdr.SnapDataReader(f'NAVER/FINSTATE/{ticker}')
 
-            df_2 = df_2[df_2.index == before_year_info_date] 
+            df_2 = df_2[df_2.index.strftime('%Y-%m-%d') == before_year_info_date] 
             df_2['Code'] = f'{ticker}'
-            rslt_df = df_1.merge(df_2, how='inner')
+            rslt_df = pd.merge(df_1, df_2, on='Code', how='inner')
 
             rslt_tot_df = pd.concat([rslt_tot_df, rslt_df], ignore_index = True)
             cnt = cnt + 1
@@ -48,6 +48,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
             break
     
     tot_df = rslt_tot_df.sort_values(by=['Change'], ascending=False)
+
     print(tot_df)
     for idx, row in tot_df.iterrows():
         print(11111111111111)
