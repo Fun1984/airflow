@@ -98,5 +98,5 @@ def get_prompt_for_chatgpt(yyyymmdd, market, cnt_thing):
         if idx >= cnt_thing-1:
             break
 
-        print('BEFORE_____' , ticker_name_lst, '++',fluctuation_rate_lst,'++', return_prompt_lst)
+    print('BEFORE_____' , len(ticker_name_lst), '++', len(fluctuation_rate_lst),'++', len(return_prompt_lst) )
     return ticker_name_lst, fluctuation_rate_lst, return_prompt_lst

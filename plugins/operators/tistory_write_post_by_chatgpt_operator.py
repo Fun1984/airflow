@@ -48,6 +48,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         print('TTTTTT_4', tot_prompt)
 
         market = 'KOSPI'
+
         for idx, prompt in enumerate(tot_prompt):
             print('TTT_1')
             temperature = randrange(10,100)/100     # 0.1 ~ 1 사이 
